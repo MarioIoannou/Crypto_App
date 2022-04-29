@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav.xml"
+    app:startDestination="@id/coinFragment">
+
+    <fragment
+        android:id="@+id/coinFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.CoinFragment"
+        android:label=""
+        tools:layout="@layout/fragment_coin" >
+        <action
+            android:id="@+id/action_CoinFragment_to_WatchlistFragment"
+            app:destination="@id/watchlistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.MoreFragment"
+        android:label=""
+        tools:layout="@layout/fragment_more" >
+        <action
+            android:id="@+id/action_MoreFragment_to_CoinFragment"
+            app:destination="@id/coinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/watchlistFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.WatchlistFragment"
+        android:label=""
+        tools:layout="@layout/fragment_watchlist" >
+        <action
+            android:id="@+id/action_watchlistFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.NewsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_moreFragment"
+            app:destination="@id/moreFragment" />
+    </fragment>
+</navigation>

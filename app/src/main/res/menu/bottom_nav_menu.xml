@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/coinFragment"
+        android:icon="@drawable/bitcoin"
+        android:title="@string/coins"/>
+
+    <item
+        android:id="@+id/watchlistFragment"
+        android:icon="@drawable/watchlist_svg"
+        android:title="@string/watchlist"/>
+
+    <item
+        android:id="@+id/newsFragment"
+        android:icon="@drawable/newspaper"
+        android:title="@string/news"/>
+
+    <item
+        android:id="@+id/moreFragment"
+        android:icon="@drawable/more"
+        android:title="@string/more"/>
+
+</menu>
