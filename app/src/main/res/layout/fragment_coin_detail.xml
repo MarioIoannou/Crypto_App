@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    tools:context=".ui.fragments.CoinDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/detail_img_coin"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/detail_img_coin"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/detail_tv_coin_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="97dp"
+                tools:layout_editor_absoluteY="2dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:text="€"
+                    android:textColor="@color/Manatee"
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="97dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <TextView
+                    android:id="@+id/detail_tv_coin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    tools:layout_editor_absoluteX="97dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="159dp"
+        android:layout_marginBottom="41dp"
+        android:background="@drawable/view_custom_fade"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="157dp"
+        android:backgroundTint="@color/light_grey"
+        android:elevation="0dp"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/price_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            tools:layout_editor_absoluteY="331dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view">
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout6"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_change_24h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change in 24h"
+                android:textColor="@color/Manatee"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_change_24h_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_high_24h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="High in 24h"
+                android:textColor="@color/Manatee"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_high_24h_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_low_24h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Low in 24h"
+                android:textColor="@color/Manatee"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_low_24h_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

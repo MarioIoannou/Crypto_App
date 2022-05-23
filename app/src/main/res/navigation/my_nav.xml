@@ -11,26 +11,42 @@
         android:label=""
         tools:layout="@layout/fragment_coin" >
         <action
-            android:id="@+id/action_CoinFragment_to_WatchlistFragment"
-            app:destination="@id/watchlistFragment" />
+            android:id="@+id/action_coinFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
+        <action
+            android:id="@+id/action_coinFragment_to_trendingCoinDetailFragment"
+            app:destination="@id/trendingCoinDetailFragment" />
+        <action
+            android:id="@+id/action_coinFragment_to_searchingFragment"
+            app:destination="@id/searchingFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFragment"
         android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.MoreFragment"
         android:label=""
-        tools:layout="@layout/fragment_more" >
-        <action
-            android:id="@+id/action_MoreFragment_to_CoinFragment"
-            app:destination="@id/coinFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/watchlistFragment"
         android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.WatchlistFragment"
         android:label=""
         tools:layout="@layout/fragment_watchlist" >
         <action
-            android:id="@+id/action_watchlistFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
+            android:id="@+id/action_watchlistFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
+        <action
+            android:id="@+id/action_watchlistFragment_to_trendingCoinDetailFragment"
+            app:destination="@id/trendingCoinDetailFragment" />
+        <action
+            android:id="@+id/action_watchlistFragment_to_searchingFragment"
+            app:destination="@id/searchingFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -38,7 +54,38 @@
         android:label=""
         tools:layout="@layout/fragment_news" >
         <action
-            android:id="@+id/action_newsFragment_to_moreFragment"
-            app:destination="@id/moreFragment" />
+            android:id="@+id/action_newsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/coinDetailFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.CoinDetailFragment"
+        android:label=""
+        tools:layout="@layout/fragment_coin_detail">
+<!--        <argument-->
+<!--            android:name="coin"-->
+<!--            app:argType="com.marioioannou.cryptocurrencyapp.model.crypto.Cryptocoin" />-->
+        <argument
+            android:name="coin"
+            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.crypto.CryptoCoin" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/trendingCoinDetailFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.TrendingCoinDetailFragment"
+        android:label="fragment_trending_coin_detail"
+        tools:layout="@layout/fragment_trending_coin_detail" >
+        <argument
+            android:name="trend"
+            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.trending_coins.Item" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchingFragment"
+        android:name="com.marioioannou.cryptocurrencyapp.SearchingFragment"
+        android:label="fragment_searching"
+        tools:layout="@layout/fragment_searching" />
 </navigation>

@@ -5,8 +5,10 @@
         android:id="@+id/menu_search"
         android:title="@string/search"
         android:icon="@drawable/search_2"
+        android:editTextColor="@color/black"
+        android:iconTint="@color/black"
         app:showAsAction="collapseActionView|ifRoom"
-        app:actionViewClass="android.widget.SearchView"/>
+        app:actionViewClass="android.widget.SearchView" />
 
     <item
         android:id="@+id/menu_sortBy"

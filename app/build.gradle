@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.marioioannou.cryptocurrencyapp"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -77,4 +79,7 @@ dependencies {
 
     // Accompanist for loading image with Coil
     implementation "io.coil-kt:coil:1.4.0"
+
+    //Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

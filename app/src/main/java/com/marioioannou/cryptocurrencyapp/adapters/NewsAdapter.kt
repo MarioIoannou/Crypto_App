@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.marioioannou.cryptocurrencyapp.R
 import com.marioioannou.cryptocurrencyapp.databinding.NewsRecyclerviewRowBinding
 import com.marioioannou.newsapp.news_data.model.Article
 
@@ -35,7 +36,11 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article =  differ.currentList[position]
         holder.binding.apply {
-            imgImage.load(article.urlToImage)
+            if (article.urlToImage == null){
+                imgImage.load(R.drawable.no_image_available)
+            }else{
+                imgImage.load(article.urlToImage)
+            }
             tvTitle.text = article.title
             tvDescription.text = article.description
             tvSource.text = article.source.name

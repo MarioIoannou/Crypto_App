@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         android:textColor="@color/myBlue_2"
         android:textSize="40dp"
-        android:text="News Fragment" />
+        android:text="Watchlist Fragment" />
 
 </FrameLayout>

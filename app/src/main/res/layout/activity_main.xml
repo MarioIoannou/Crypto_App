@@ -4,20 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/myWhite"
+    android:background="@color/white"
     tools:context=".ui.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/myBlue_2"
-        android:theme="?attr/actionBarTheme"
+
+        android:theme="@style/ThemeOverlay.AppTheme.Toolbar.Primary"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/et_search"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:hint="Search Coins"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textColorHint="@color/myGrey"-->
+        <!--            android:backgroundTint="@color/white"/>-->
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -32,16 +43,27 @@
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:navGraph="@navigation/my_nav" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/view_custom_fade"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
         android:layout_gravity="center"
-        android:backgroundTint="@null"
-        android:background="@drawable/bottom_app_bar_corners"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:paddingTop="5dp"
+        app:itemRippleColor="@null"
         app:itemIconTint="@color/nav_color"
-        app:itemTextColor="@color/white"
+        app:itemTextColor="@color/Yellow_Crayola"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,21 +6,31 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.marioioannou.cryptocurrencyapp.coin_data.model.crypto.CryptoCoin
+import com.marioioannou.cryptocurrencyapp.coin_data.model.cryptosearch.CoinSearch
+import com.marioioannou.cryptocurrencyapp.coin_data.model.trending_coins.TrendingCoins
 import com.marioioannou.cryptocurrencyapp.coin_data.repository.CoinRepository
 import com.marioioannou.cryptocurrencyapp.utils.ScreenState
 import com.marioioannou.newsapp.news_data.model.News
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import retrofit2.http.Query
 
 class MainViewModel(private val repository: CoinRepository):ViewModel() {
 
+    private val _trendingCoins = MutableLiveData<ScreenState<TrendingCoins>>()
+    val trendingCoins: LiveData<ScreenState<TrendingCoins>> = _trendingCoins
+
     private val _coinData = MutableLiveData<ScreenState<MutableList<CryptoCoin>>>()
     val coinData: LiveData<ScreenState<MutableList<CryptoCoin>>> = _coinData
+    var page = 1
 
-    val news: MutableLiveData<ScreenState<News>> = MutableLiveData()
+    private val _searchCoin = MutableLiveData<ScreenState<CoinSearch>>()
+    val searchCoin: LiveData<ScreenState<CoinSearch>> = _searchCoin
+
+    private val _news = MutableLiveData<ScreenState<News>>()
+    val news: LiveData<ScreenState<News>> = _news
+
     var countryCode: String = "us"
-    val pages: Int = 100
+    val newsPages: Int = 100
     val categoryNews: String = "business"
 
     private val TAG = "CoinFragmentViewModel"
@@ -29,24 +39,79 @@ class MainViewModel(private val repository: CoinRepository):ViewModel() {
         Log.e(TAG,"init")
         getCoinData("eur")
         getNews()
+        getTrendingCoins()
+    }
+
+    private fun getTrendingCoins() {
+        viewModelScope.launch {
+            _trendingCoins.postValue(ScreenState.Loading())
+            val response = repository.getTrendingCoinsRepository()
+            _trendingCoins.postValue(handleTrendingCoinsResponse(response))
+        }
     }
 
     private fun getCoinData(currency : String) {
         viewModelScope.launch {
             _coinData.postValue(ScreenState.Loading())
-            val response = repository.getCoinRepository(currency)
+            val response = repository.getCoinRepository(currency,1)
             _coinData.postValue(handleCoinDataResponse(response))
+        }
+    }
+
+    fun getSearchCoin(searchQuery: String) {
+        viewModelScope.launch {
+            _searchCoin.postValue(ScreenState.Loading())
+            val response = repository.getSearchedCoinsRepository(searchQuery)
+            _searchCoin.postValue(handleSearchCoinResponse(response))
         }
     }
 
     private fun getNews() {
         viewModelScope.launch {
-            news.postValue(ScreenState.Loading())
-            val response = repository.getNewsRepository(countryCode, pages, categoryNews)
-            news.postValue(handleBreakingNewsResponse(response))
+            _news.postValue(ScreenState.Loading())
+            val response = repository.getNewsRepository(countryCode, newsPages, categoryNews)
+            _news.postValue(handleNewsResponse(response))
         }
     }
-//        Log.e(TAG,"getCoinData()")
+
+    //Handles
+    private fun handleTrendingCoinsResponse(response: Response<TrendingCoins>): ScreenState<TrendingCoins> {
+        if (response.isSuccessful){
+            response.body()?.let{ trendingCoin ->
+                return ScreenState.Success(trendingCoin)
+            }
+        }
+        return ScreenState.Error(null,"An Error occurred ${response.message()}")
+    }
+
+    private fun handleCoinDataResponse(response: Response<MutableList<CryptoCoin>>): ScreenState<MutableList<CryptoCoin>> {
+        if (response.isSuccessful){
+            response.body()?.let{ coinData ->
+                return ScreenState.Success(coinData)
+            }
+        }
+        return ScreenState.Error(null,"An Error occurred ${response.message()}")
+    }
+
+    private fun handleNewsResponse(response: Response<News>): ScreenState<News>{
+        if(response.isSuccessful){
+            response.body()?.let { result ->
+                return ScreenState.Success(result)
+            }
+        }
+        return  ScreenState.Error(null,response.message())
+    }
+
+    private fun handleSearchCoinResponse(response: Response<CoinSearch>): ScreenState<CoinSearch> {
+        if (response.isSuccessful){
+            response.body()?.let{ search ->
+                return ScreenState.Success(search)
+            }
+        }
+        return ScreenState.Error(null,"An Error occurred ${response.message()}")
+    }
+
+    //        Log.e(TAG,"getCoinData()")
 //        _coinData.postValue(ScreenState.Loading())
 //        viewModelScope.launch {
 //            try{
@@ -66,22 +131,4 @@ class MainViewModel(private val repository: CoinRepository):ViewModel() {
 //            }
 //        }
 //    }
-
-    private fun handleCoinDataResponse(response: Response<MutableList<CryptoCoin>>): ScreenState<MutableList<CryptoCoin>> {
-        if (response.isSuccessful){
-            response.body()?.let{ coinData ->
-                return ScreenState.Success(coinData)
-            }
-        }
-        return ScreenState.Error(null,"An Error occurred ${response.message()}")
-    }
-
-    private fun handleBreakingNewsResponse(response: Response<News>): ScreenState<News>{
-        if(response.isSuccessful){
-            response.body()?.let { result ->
-                return ScreenState.Success(result)
-            }
-        }
-        return  ScreenState.Error(null,response.message())
-    }
 }

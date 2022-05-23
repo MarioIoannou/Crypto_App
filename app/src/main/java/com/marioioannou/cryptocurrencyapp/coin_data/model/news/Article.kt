@@ -2,10 +2,8 @@ package com.marioioannou.newsapp.news_data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
-@Entity(
-    tableName = "Articles Table"
-)
 data class Article(
     @PrimaryKey(autoGenerate = true) //Autogenerate id number
     var id: Int? = null, //It is null because not all articles have ids
@@ -17,4 +15,4 @@ data class Article(
     val title: String,
     val url: String,
     val urlToImage: String
-)
+):Serializable
