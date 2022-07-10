@@ -9,7 +9,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marioioannou.cryptocurrencyapp.R
@@ -17,22 +20,24 @@ import com.marioioannou.cryptocurrencyapp.databinding.FragmentCoinBinding
 import com.marioioannou.cryptocurrencyapp.ui.MainViewModel
 import com.marioioannou.cryptocurrencyapp.adapters.CoinAdapter
 import com.marioioannou.cryptocurrencyapp.adapters.TrendingCoinsAdapter
+import com.marioioannou.cryptocurrencyapp.coin_data.api.CoinApiService
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_data.CryptoCoin
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_search.Coin
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_search.CoinSearch
 import com.marioioannou.cryptocurrencyapp.ui.MainActivity
-import com.marioioannou.cryptocurrencyapp.utils.Constants.Companion.SEARCH_NEWS_DELAY
 import com.marioioannou.cryptocurrencyapp.utils.ScreenState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.IOException
 
-class CoinFragment : Fragment()/*, SearchView.OnQueryTextListener*/ {
+class CoinFragment : Fragment() {
 
     private lateinit var binding: FragmentCoinBinding
     private lateinit var coinAdapter: CoinAdapter
     private lateinit var trendAdapter: TrendingCoinsAdapter
     lateinit var viewModel: MainViewModel
-    lateinit var query: String
-    var job: Job? = null
     private var TAG = "CoinFragment"
 
     override fun onCreateView(
@@ -48,182 +53,112 @@ class CoinFragment : Fragment()/*, SearchView.OnQueryTextListener*/ {
         setHasOptionsMenu(true)
 
         viewModel = (activity as MainActivity).viewModel //Each fragment
+        setupRecyclerView()
+        setupTrendingRecyclerView()
 
-        coinAdapter = CoinAdapter{ coin ->
+//        coinAdapter = CoinAdapter{ coin ->
+//            val action = CoinFragmentDirections.actionCoinFragmentToCoinDetailFragment(coin)
+//            findNavController().navigate(action)
+//        }
+
+//        coinAdapter.setOnItemClickListener { coin ->
+//            val bundle = Bundle().apply {
+//                putSerializable("details", coin)
+//            }
+//            findNavController().navigate(R.id.action_coinFragment_to_coinDetailFragment, bundle)
+//        }
+
+        coinAdapter.setOnItemClickListener { coin : CryptoCoin ->
             val action = CoinFragmentDirections.actionCoinFragmentToCoinDetailFragment(coin)
             findNavController().navigate(action)
         }
 
-        setupRecyclerView(coinAdapter)
-        setupTrendingRecyclerView()
-        viewModel.coinData.observe(viewLifecycleOwner, Observer { response ->
-            Log.e(TAG, "viewModel.observe")
-            //processResponse(response)
-            when (response) {
+        val searchList = mutableListOf<Coin>()
+        viewModel.coinData.observe(viewLifecycleOwner, Observer { coinResponse ->
+            Log.e(TAG, "viewModel.coinData.observe")
+            when (coinResponse) {
                 is ScreenState.Loading -> {
-                    Log.e(TAG, "processResponse Loading")
+                    Log.e(TAG, "coinData Response Loading")
                     binding.progressBar.isVisible = false
                 }
                 is ScreenState.Success -> {
-                    Log.e(TAG, "processResponse Success")
+                    Log.e(TAG, " coinData Response Success")
                     binding.progressBar.isVisible = false
-                    response.data?.let { coindata ->
-                        coinAdapter.differ.submitList(coindata)
+                    coinResponse.data?.let { coindata ->
+                        coinAdapter.differ.submitList(coindata.coins)
                     }
                 }
                 is ScreenState.Error -> {
-                    Log.e(TAG, "processResponse Error")
+                    Log.e(TAG, "coinData Response Error")
                     binding.progressBar.isVisible = false
-                    notConnected()
+                    //notConnected()
                 }
             }
         })
 
         viewModel.trendingCoins.observe(viewLifecycleOwner, Observer { response ->
-            Log.e(TAG, "viewModel.observe")
+            Log.e(TAG, "viewModel.trendingCoins.observe")
             //processResponse(response)
             when (response) {
                 is ScreenState.Loading -> {
-                    Log.e(TAG, "processResponse Loading")
+                    Log.e(TAG, "trendingCoins Response Loading")
                     binding.progressBar.isVisible = false
                 }
                 is ScreenState.Success -> {
-                    Log.e(TAG, "processResponse Success")
+                    Log.e(TAG, " trendingCoins Response Success")
                     binding.progressBar.isVisible = false
                     response.data?.let { coindata ->
                         trendAdapter.differ.submitList(coindata.coins)
                     }
                 }
                 is ScreenState.Error -> {
-                    Log.e(TAG, "processResponse Error")
+                    Log.e(TAG, "trendingCoins Response Error")
                     binding.progressBar.isVisible = false
-                    notConnected()
+                    //notConnected()
                 }
             }
         })
     }
 
-//    private fun processResponse(state: ScreenState<Response<MutableList<Coin>>>) {
-//        Log.e(TAG, "processResponse")
-//        when (state) {
-//            is ScreenState.Loading -> {
-//                Log.e(TAG, "processResponse Loading")
-//                binding.progressBar.isVisible = false
-//            }
-//            is ScreenState.Success -> {
-//                Log.e(TAG, "processResponse Success")
-//                if (state.data != null) {
-//                    binding.rvCoinRecyclerview.apply {
-//                        recyclerViewAdapter = CoinAdapter(requireActivity(), state.data)
-//                        adapter = recyclerViewAdapter
-//                        layoutManager = LinearLayoutManager(requireContext())
-//                        binding.progressBar.isVisible = false
-//                    }
-//                }
-//            }
-//            is ScreenState.Error -> {
-//                Log.e(TAG, "processResponse Error")
-//                binding.progressBar.isVisible = false
-//                notConnected()
-//            }
-//        }
-//    }
-
-    private fun setupRecyclerView(Adapter: CoinAdapter) {
-        coinAdapter = Adapter
+    private fun setupRecyclerView() {
+        coinAdapter = CoinAdapter()
         binding.rvCoinRecyclerview.apply {
-            adapter = Adapter
+            adapter = coinAdapter
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
         }
     }
 
     private fun setupTrendingRecyclerView() {
-        trendAdapter = TrendingCoinsAdapter {}
+        trendAdapter = TrendingCoinsAdapter()
         binding.rvTrending.apply {
             adapter = trendAdapter
-            layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.toolbar_coin_fragment, menu)
-        val searchItem = menu.findItem(R.id.menu_search)
-        val searchView = searchItem.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.searchCoin.observe(viewLifecycleOwner, Observer { response ->
-                    Log.e(TAG, "viewModel.observe")
-                    //processResponse(response)
-//                    when(response) {
-//                        is ScreenState.Success -> {
-//                            response.data?.let { searchResponse ->
-//                                coinAdapter.differ2.submitList(searchResponse.coins.toMutableList())
-//                            }
-//                        }
-//                        is ScreenState.Error -> {
-//                            response.message?.let { message ->
-//                                Log.e("BreakingNewsFrag",message)
-//                            }
-//                        }
-//                        is ScreenState.Loading -> {
-//                        }
-//                    }
-                })
-                return false
-            }
-
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                viewModel.getSearchCoin(query)
-//                return false
-//            }
-
-        })
     }
 
-//    private fun searchCoins(query: String) {
-//        var searchCoin = query
-//        searchCoin = "%$searchCoin%"
-//        job?.cancel()
-//        job = MainScope().launch {
-//            delay(SEARCH_NEWS_DELAY)
-//            query.let {
-//                if (query.isNotEmpty()){
-//                    viewModel.getSearchCoin(query)
-//                }
-//            }
-//
-//        }
-//    }
-
-    private fun notConnected() {
-        val dialogBuilder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
-        dialogBuilder
-            .setMessage("Please check your connection and try again.")
-            .setTitle("Connection")
-            .setCancelable(false)
-            .setNegativeButton("Exit", DialogInterface.OnClickListener { _, _ -> onDestroy() })
-            .setIcon(R.drawable.no_wifi)
-            .show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_search -> {
+                findNavController().navigate(R.id.coinsSearch)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
-//    override fun onQueryTextSubmit(query: String?): Boolean {
-//        if (query != null) {
-//            viewModel.getSearchCoin(query)
-//        }
-//        return false
+//    private fun notConnected() {
+//        val dialogBuilder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
+//        dialogBuilder
+//            .setMessage("Please check your connection and try again.")
+//            .setTitle("Connection")
+//            .setCancelable(false)
+//            .setNegativeButton("Exit", DialogInterface.OnClickListener { _, _ -> onDestroy() })
+//            .setIcon(R.drawable.no_wifi)
+//            .show()
 //    }
-//
-//    override fun onQueryTextChange(newText: String?): Boolean {
-//        return false
-//    }
-
-
 }

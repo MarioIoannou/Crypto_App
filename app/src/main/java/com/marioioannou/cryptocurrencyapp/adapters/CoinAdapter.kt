@@ -8,33 +8,16 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.marioioannou.cryptocurrencyapp.coin_data.model.crypto.CryptoCoin
-import com.marioioannou.cryptocurrencyapp.coin_data.model.cryptosearch.Coin
+import com.marioioannou.cryptocurrencyapp.R
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_data.CoinData
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_data.CryptoCoin
 import com.marioioannou.cryptocurrencyapp.databinding.CoinRecyclerviewRowBinding
-import com.marioioannou.newsapp.news_data.model.Article
 
-class CoinAdapter(
-    private val onItemClicked: (CryptoCoin) -> Unit,
-) : RecyclerView.Adapter<CoinAdapter.ViewHolder>() {
+class CoinAdapter : RecyclerView.Adapter<CoinAdapter.ViewHolder>() {
 
-    //private val coinData = coinsData?.body() as MutableList
-    //val coinData = mutableListOf<Coin>()
     inner class ViewHolder(val binding: CoinRecyclerviewRowBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(coin: CryptoCoin) {
-            binding.apply {
-                val coinLogo = coin.image
-                tvCoinName.text = coin.name
-                tvCoinSymbol.text = coin.symbol?.uppercase()
-                tvCoinPrice.text = "€" + coin.current_price.toString()
-                tvCoinPriceChange.text =
-                    coin.price_change_percentage_24h.toString() + "%"
-                imageCoinLogo.load(coinLogo)
-            }
-        }
-    }
+        RecyclerView.ViewHolder(binding.root)
 
-    // - //
     private val differCallback = object : DiffUtil.ItemCallback<CryptoCoin>() {
         override fun areItemsTheSame(oldItem: CryptoCoin, newItem: CryptoCoin): Boolean {
             return oldItem.name == newItem.name
@@ -45,7 +28,6 @@ class CoinAdapter(
         }
     }
 
-    // Compute the difference of two lists in the background
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(
@@ -60,42 +42,34 @@ class CoinAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val coin = differ.currentList[position]
-        holder.apply {
-            bind(coin)
+        holder.binding.apply {
+            val coinLogo = coin.icon
+            if(coinLogo == null){
+                imageCoinLogo.load(R.drawable.no_image_available)
+            }else{
+                imageCoinLogo.load(coinLogo)
+            }
+            tvCoinName.text = coin.name
+            tvCoinSymbol.text = coin.symbol?.uppercase()
+            tvCoinPrice.text = "€ " + coin.price.toString()
+//            tvCoinPriceChange.text =
+//                coin.priceChange1h.toString() + "%"
+            tvCoinPriceChange.text = coin.rank.toString()
+
         }
         holder.itemView.setOnClickListener {
-            onItemClicked(coin)
+            onItemClickListener?.let { it(coin) }
         }
     }
 
     override fun getItemCount(): Int {
-        //return coinData.size
-        //Log.e("CoinAdapter", differ.currentList.size.toString())
+
         return differ.currentList.size
     }
 
-//    private var onItemClickListener: ((CryptoCoin) -> Unit)? = null
-//
-//    private fun setOnItemClickListener(listener: (CryptoCoin) -> Unit){
-//        onItemClickListener = listener
-//    }
-}
+    private var onItemClickListener: ((CryptoCoin) -> Unit)? = null
+    fun setOnItemClickListener(listener: (CryptoCoin) -> Unit){
+        onItemClickListener = listener
+    }
 
-//@SuppressLint("SetTextI18n")
-//override fun onBindViewHolder(holder: CoinAdapter.ViewHolder, position: Int) {
-//    val coin = differ.currentList[position]
-//    holder.apply {
-//        val coinLogo = coin.image
-//        tvCoinName.text = coin.name
-//        tvCoinSymbol.text = coin.symbol.uppercase()
-//        tvCoinPrice.text = "€" + coin.current_price.toString()
-//        tvCoinPriceChange.text =
-//            coin.price_change_percentage_24h.toString() + "%"
-//        imageCoinLogo.load(coinLogo)
-//        setOnItemClickListener {
-//            onItemClickListener?.let {
-//                it(coin)
-//            }
-//        }
-//    }
-//}
+}

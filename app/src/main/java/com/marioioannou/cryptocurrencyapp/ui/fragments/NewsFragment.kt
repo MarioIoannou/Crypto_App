@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marioioannou.cryptocurrencyapp.R
 import com.marioioannou.cryptocurrencyapp.adapters.NewsAdapter
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_news.New
 import com.marioioannou.cryptocurrencyapp.databinding.FragmentNewsBinding
 import com.marioioannou.cryptocurrencyapp.ui.MainActivity
 import com.marioioannou.cryptocurrencyapp.ui.MainViewModel
@@ -26,13 +28,21 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentNewsBinding.inflate(inflater,container,false)
+
         viewModel = (activity as MainActivity).viewModel
+
         setUpRecyclerView()
-        viewModel.news.observe(viewLifecycleOwner, Observer { response ->
+
+        newsAdapter.setOnItemClickListener { article : New->
+            val action = NewsFragmentDirections.actionNewsFragmentToArticleFragment(article)
+            findNavController().navigate(action)
+        }
+
+        viewModel.coinNews.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is ScreenState.Success -> {
                     response.data?.let { newsResponse ->
-                        newsAdapter.differ.submitList(newsResponse.articles)
+                        newsAdapter.differ.submitList(newsResponse.news)
                     }
                 }
                 is ScreenState.Error -> {
@@ -53,6 +63,7 @@ class NewsFragment : Fragment() {
         binding.rvNewsRecyclerview.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
         }
     }
 }

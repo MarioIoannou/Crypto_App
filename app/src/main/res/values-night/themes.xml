@@ -17,14 +17,14 @@
     </style>
 
     <style name="ProgressBarStyle">
-        <item name="colorAccent">@color/Yellow_Crayola</item>
+        <item name="colorAccent">@color/teal</item>
     </style>
 
     <style name="ThemeOverlay.AppTheme.Toolbar.Primary"
         parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
-        <item name="colorControlActivated">@color/Yellow_Crayola</item>
+        <item name="colorControlActivated">@color/teal</item>
         <item name="android:editTextColor">@color/white</item>
-        <item name="android:textColorHint">@color/Yellow_Crayola</item>
+        <item name="android:textColorHint">@color/teal</item>
     </style>
 
     <style name="AlertDialogTheme">

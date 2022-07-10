@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_blue_dark"
     tools:context=".ui.fragments.MoreFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/Yellow_Crayola"
+        android:textColor="@color/teal"
         android:textSize="40dp"
         android:text="More Fragment" />
 

@@ -11,7 +11,7 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-
+        android:background="@color/dark_blue_dark"
         android:theme="@style/ThemeOverlay.AppTheme.Toolbar.Primary"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="4dp"
         android:background="@drawable/view_custom_fade"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,12 +58,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/white"
-        android:backgroundTint="@color/white"
+        android:background="@color/dark_blue_medium"
+        android:backgroundTint="@color/black_medium"
         android:paddingTop="5dp"
         app:itemRippleColor="@null"
         app:itemIconTint="@color/nav_color"
-        app:itemTextColor="@color/Yellow_Crayola"
+        app:itemTextColor="@color/teal"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

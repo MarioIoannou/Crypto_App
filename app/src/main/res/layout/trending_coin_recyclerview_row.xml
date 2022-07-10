@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="140dp"
+    android:layout_width="180dp"
     android:layout_height="140dp"
     android:layout_margin="5dp"
+    android:background="@drawable/bg_trend_card_row"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="20dp"
-    android:elevation="0dp"
-    app:cardElevation="2dp">
+    android:elevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/open_sans"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,13 +44,13 @@
             app:layout_constraintTop_toBottomOf="@+id/img_trending" />
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/layout_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.888"
+            app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_trending_name"
             app:layout_constraintVertical_bias="0.0">
@@ -62,8 +62,8 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
                 android:gravity="top"
-                android:text="btc"
-                android:textColor="@color/Manatee"
+                android:text="€ "
+                android:textColor="@color/light_blue"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_trending_price"
@@ -76,8 +76,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="@font/open_sans"
-                android:maxEms="10"
-                android:textColor="@color/black"
+                android:maxLength="5"
+                android:textColor="@color/teal"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,4 +87,4 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,20 +7,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.marioioannou.cryptocurrencyapp.R
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_news.New
 import com.marioioannou.cryptocurrencyapp.databinding.NewsRecyclerviewRowBinding
-import com.marioioannou.newsapp.news_data.model.Article
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(var binding: NewsRecyclerviewRowBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<Article>() {
-        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-            return oldItem.url == newItem.url
+    private val differCallback = object : DiffUtil.ItemCallback<New>() {
+        override fun areItemsTheSame(oldItem: New, newItem: New): Boolean {
+            return oldItem.link == newItem.link
         }
 
-        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+        override fun areContentsTheSame(oldItem: New, newItem: New): Boolean {
             return oldItem == newItem
         }
     }
@@ -36,18 +36,18 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article =  differ.currentList[position]
         holder.binding.apply {
-            if (article.urlToImage == null){
+            if (article.imgURL == null){
                 imgImage.load(R.drawable.no_image_available)
             }else{
-                imgImage.load(article.urlToImage)
+                imgImage.load(article.imgURL)
             }
             tvTitle.text = article.title
-            tvDescription.text = article.description
-            tvSource.text = article.source.name
-            setOnItemClickListener {
-                onItemClickListener?.let{
-                    it(article)
-                }
+            //tvDescription.text = article.description
+            tvSource.text = article.source
+            cvReadMore.setOnClickListener {
+                    onItemClickListener?.let{
+                        it(article)
+                    }
             }
         }
     }
@@ -56,9 +56,9 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((Article) -> Unit)? = null
+    private var onItemClickListener: ((New) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Article) -> Unit){
+    fun setOnItemClickListener(listener: (New) -> Unit){
         onItemClickListener = listener
     }
 }

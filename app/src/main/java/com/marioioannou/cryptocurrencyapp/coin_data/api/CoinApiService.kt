@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CoinApiService {
     companion object {
-        //Coin
+
+        //Coins
         private val coin_api by lazy {
             val logging = HttpLoggingInterceptor() //Log responses of retrofit
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -27,23 +28,23 @@ class CoinApiService {
             coin_api.create(CoinApi::class.java)
         }
 
-        //News
-        private val news_api by lazy {
-            val loggingNews = HttpLoggingInterceptor() //Log responses of retrofit
+        //Trending Coins
+        private val trending_coin_api by lazy {
+            val loggingNews = HttpLoggingInterceptor()
             loggingNews.setLevel(HttpLoggingInterceptor.Level.BODY)
             val clientNews = OkHttpClient.Builder()
                 .addInterceptor(loggingNews)
                 .build()
 
             Retrofit.Builder()
-                .baseUrl(Constants.NEWS_DATA_URL)
+                .baseUrl(Constants.COIN_TRENDING_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(clientNews)
                 .build()
         }
 
-        val newsApi: CoinApi by lazy {
-            news_api.create(CoinApi::class.java)
+        val trendingCoinApi: CoinApi by lazy {
+            trending_coin_api.create(CoinApi::class.java)
         }
     }
 }

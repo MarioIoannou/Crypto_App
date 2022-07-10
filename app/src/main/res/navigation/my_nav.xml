@@ -18,8 +18,12 @@
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"/>
         <action
-            android:id="@+id/action_coinFragment_to_trendingCoinDetailFragment"
-            app:destination="@id/trendingCoinDetailFragment" />
+            android:id="@+id/action_coinFragment_to_coinsSearch"
+            app:destination="@id/coinsSearch"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_coinFragment_to_searchingFragment"
             app:destination="@id/searchingFragment" />
@@ -41,12 +45,6 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"/>
-        <action
-            android:id="@+id/action_watchlistFragment_to_trendingCoinDetailFragment"
-            app:destination="@id/trendingCoinDetailFragment" />
-        <action
-            android:id="@+id/action_watchlistFragment_to_searchingFragment"
-            app:destination="@id/searchingFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -55,7 +53,11 @@
         tools:layout="@layout/fragment_news" >
         <action
             android:id="@+id/action_newsFragment_to_articleFragment"
-            app:destination="@id/articleFragment" />
+            app:destination="@id/articleFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/coinDetailFragment"
@@ -67,25 +69,26 @@
 <!--            app:argType="com.marioioannou.cryptocurrencyapp.model.crypto.Cryptocoin" />-->
         <argument
             android:name="coin"
-            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.crypto.CryptoCoin" />
+            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.coin_data.CryptoCoin" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
         android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.ArticleFragment"
-        android:label="fragment_article"
-        tools:layout="@layout/fragment_article" />
-    <fragment
-        android:id="@+id/trendingCoinDetailFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.TrendingCoinDetailFragment"
-        android:label="fragment_trending_coin_detail"
-        tools:layout="@layout/fragment_trending_coin_detail" >
+        android:label=""
+        tools:layout="@layout/fragment_article" >
         <argument
-            android:name="trend"
-            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.trending_coins.Item" />
+            android:name="article"
+            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.coin_news.New" />
     </fragment>
+    <activity
+        android:id="@+id/coinsSearch"
+        android:name="com.marioioannou.cryptocurrencyapp.ui.CoinsSearch"
+        android:label=""
+        tools:layout="@layout/activity_coins_search" />
     <fragment
         android:id="@+id/searchingFragment"
         android:name="com.marioioannou.cryptocurrencyapp.SearchingFragment"
         android:label="fragment_searching"
         tools:layout="@layout/fragment_searching" />
+
 </navigation>

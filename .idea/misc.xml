@@ -5,24 +5,35 @@
       <map>
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable-v24/view_custom_fade.xml" value="0.2485" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable-xxxhdpi/ripple_article.xml" value="0.174" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable-xxxhdpi/view_custom_fade_navbar.xml" value="0.175" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/bg_card_row.xml" value="0.261" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/bg_trend_card_row.xml" value="0.262" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/bottom_app_bar_corners.xml" value="0.1635" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/custom_searchview.xml" value="0.175" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1635" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.262" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/search_2.xml" value="0.1635" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/search_svg.xml" value="0.1635" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/sort_svg.xml" value="0.1635" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/drawable/watchlist_svg.xml" value="0.1635" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout-v28/coin_recyclerview_row.xml" value="0.2557291666666667" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/activity_coins_search.xml" value="0.264" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/coin_recyclerview_row.xml" value="0.4" />
-        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_article.xml" value="0.30312099187687047" />
-        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_coin.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_coin_detail.xml" value="0.4" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/coin_recyclerview_row.xml" value="0.6333808844507846" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/content_coins_search.xml" value="0.21077383497221033" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_article.xml" value="0.2" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_coin.xml" value="0.264" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_coin_detail.xml" value="0.264" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_more.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_news.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_searched_coin_details.xml" value="0.21077383497221033" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_searching.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_trending_coin_detail.xml" value="0.21077383497221033" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_trending_coin_details.xml" value="0.21077383497221033" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/fragment_watchlist.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/news_recyclerview_row.xml" value="0.4" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/news_recyclerview_row.xml" value="0.176" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/ripple_article.xml" value="0.21077383497221033" />
-        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/trending_coin_recyclerview_row.xml" value="0.264" />
+        <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/trending_coin_recyclerview_row.xml" value="0.8800000000000001" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/layout/view_custom_fade.xml" value="0.2830269345874305" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/menu-v26/toolbar_coin_fragment.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/mario/AndroidStudioProjects/CryptocurrencyApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25677083333333334" />

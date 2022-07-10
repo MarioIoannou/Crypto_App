@@ -26,8 +26,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.myToolbar)
         fragmentNavigation()
 
+        binding.myToolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
         val repository = CoinRepository()
-        val factory = MainViewModelFactory(repository)
+        val factory = MainViewModelFactory(application,repository)
         viewModel = ViewModelProvider(this,factory)[MainViewModel::class.java]
     }
 

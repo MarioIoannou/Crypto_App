@@ -1,41 +1,44 @@
 package com.marioioannou.cryptocurrencyapp.coin_data.api
 
-import com.marioioannou.cryptocurrencyapp.coin_data.model.crypto.CryptoCoin
-import com.marioioannou.cryptocurrencyapp.coin_data.model.cryptosearch.CoinSearch
+
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_charts.CoinChart
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_search.CoinSearch
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_data.CoinData
+import com.marioioannou.cryptocurrencyapp.coin_data.model.coin_news.CoinNews
 import com.marioioannou.cryptocurrencyapp.coin_data.model.trending_coins.TrendingCoins
-import com.marioioannou.cryptocurrencyapp.utils.Constants.Companion.API_KEY
-import com.marioioannou.newsapp.news_data.model.News
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CoinApi {
     @GET("api/v3/search/trending")
     suspend fun getTrendingCoins():Response<TrendingCoins>
 
-    @GET("api/v3/coins/markets/")
-    suspend fun getCoinsData(
-        @Query("vs_currency")
-        currency: String,
-        @Query("page")
-        pageNumber: Int
-    ): Response<MutableList<CryptoCoin>>
+    @GET("v1/coins")
+    suspend fun getCoins(
+        @Query("currency") currency: String = "EUR",
+        @Query("limit") limit: Int = 1000,
+        @Query("skip") skip: Int = 0
+    ): Response<CoinData>
 
-    @GET("api/v3/search")
-    suspend fun getSearchedCoins(
-        @Query("query")
-        currency: String
+    @GET("v1/coins/{coinId}")
+    suspend fun getCoinById(
+        @Path("coinId") coinId: String,
+        @Query("currency") currency: String = "EUR"
     ): Response<CoinSearch>
 
-    @GET("v2/top-headlines")
-    suspend fun getNews(
-        @Query("country")
-        countryCode: String = "us",
-        @Query("pageSize")
-        pages: Int = 100,
-        @Query("category")
-        categoryNews: String = "business",
-        @Query("apiKey")
-        apiKey: String = API_KEY,
-    ): Response<News>
+    @GET("v1/charts")
+    suspend fun getCoinChartsData(
+        @Query("coinId") coinId: String,
+        @Query("period") period: String = "24h"
+    ): Response<CoinChart>
+
+    @GET("v1/news/{filter}")
+    suspend fun getCoinNews(
+        @Path("filter") filter: String = "trending",
+        @Query("limit") limit: Int = 20,
+        @Query("skip") skip: Int = 0
+    ): Response<CoinNews>
+
 }

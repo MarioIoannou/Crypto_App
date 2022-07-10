@@ -8,18 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="myWhite">#EAEAEB</color>
-    <color name="myGrey">#B3C4CC</color>
-    <color name="myBlue">#0424DD</color>
-    <color name="myBlue_2">#275BD3</color>
-
-    <color name="blurry">#3CF1EBF1</color>
-    <color name="Manatee">#8D99AE</color>
-    <color name="light_grey">#EAECEC</color>
-    <color name="Space_Cadet">#2B2D42</color>
-    <color name="Yellow_Crayola">#FAA916</color>
-
     <color name="black_dark">#0B0B0C</color>
     <color name="black_medium">#0E0E10</color>
     <color name="black_light">#121212</color>
+
+    <color name="dark_blue_dark">#0d1a2d</color>
+    <color name="dark_blue_medium">#121f30</color>
+    <color name="dark_blue_soft">#15273f</color>
+    <color name="light_blue">#8fadd9</color>
+    <color name="light_White">#dde4ea</color>
+    <color name="teal">#4fe9e5</color>
+    <color name="Yellow_Crayola">#F6AA1C</color>
 </resources>
