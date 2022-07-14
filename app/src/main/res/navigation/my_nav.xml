@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/coinFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.CoinFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.CoinFragment"
         android:label=""
         tools:layout="@layout/fragment_coin" >
         <action
@@ -27,15 +27,22 @@
         <action
             android:id="@+id/action_coinFragment_to_searchingFragment"
             app:destination="@id/searchingFragment" />
+        <action
+            android:id="@+id/action_coinFragment_to_trendingCoinDetailFragment"
+            app:destination="@id/trendingCoinDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         android:id="@+id/moreFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.MoreFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.MoreFragment"
         android:label=""
         tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/watchlistFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.WatchlistFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.WatchlistFragment"
         android:label=""
         tools:layout="@layout/fragment_watchlist" >
         <action
@@ -48,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.NewsFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.NewsFragment"
         android:label=""
         tools:layout="@layout/fragment_news" >
         <action
@@ -61,34 +68,43 @@
     </fragment>
     <fragment
         android:id="@+id/coinDetailFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.CoinDetailFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.CoinDetailFragment"
         android:label=""
         tools:layout="@layout/fragment_coin_detail">
 <!--        <argument-->
 <!--            android:name="coin"-->
-<!--            app:argType="com.marioioannou.cryptocurrencyapp.model.crypto.Cryptocoin" />-->
+<!--            app:argType="com.marioioannou.cryptopal.model.crypto.Cryptocoin" />-->
         <argument
             android:name="coin"
-            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.coin_data.CryptoCoin" />
+            app:argType="com.marioioannou.cryptopal.coin_data.model.coin_data.CryptoCoin" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.fragments.ArticleFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.ArticleFragment"
         android:label=""
         tools:layout="@layout/fragment_article" >
         <argument
             android:name="article"
-            app:argType="com.marioioannou.cryptocurrencyapp.coin_data.model.coin_news.New" />
+            app:argType="com.marioioannou.cryptopal.coin_data.model.coin_news.New" />
     </fragment>
     <activity
         android:id="@+id/coinsSearch"
-        android:name="com.marioioannou.cryptocurrencyapp.ui.CoinsSearch"
+        android:name="com.marioioannou.cryptopal.ui.CoinsSearch"
         android:label=""
         tools:layout="@layout/activity_coins_search" />
     <fragment
         android:id="@+id/searchingFragment"
-        android:name="com.marioioannou.cryptocurrencyapp.SearchingFragment"
+        android:name="com.marioioannou.cryptopal.SearchingFragment"
         android:label="fragment_searching"
         tools:layout="@layout/fragment_searching" />
+    <fragment
+        android:id="@+id/trendingCoinDetailFragment"
+        android:name="com.marioioannou.cryptopal.ui.fragments.TrendingCoinDetailFragment"
+        android:label=""
+        tools:layout="@layout/fragment_trending_coin_detail" >
+        <argument
+            android:name="trend"
+            app:argType="com.marioioannou.cryptopal.coin_data.model.trending_coins.Coin" />
+    </fragment>
 
 </navigation>

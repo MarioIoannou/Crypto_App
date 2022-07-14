@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Crypto\nWatch</string>
+    <string name="app_name">Crypto\nPal</string>
     <string name="null_space" />
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -12,4 +12,5 @@
     <string name="name">Name</string>
     <string name="change_24h">24H Change</string>
     <string name="change_7d">7D Change</string>
+    <string name="save">Save</string>
 </resources>

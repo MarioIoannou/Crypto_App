@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.marioioannou.cryptocurrencyapp"
+        applicationId "com.marioioannou.cryptopal"
         minSdk 26
         targetSdk 32
         versionCode 1

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="180dp"
     android:layout_height="140dp"
-    android:layout_margin="5dp"
+    android:layout_margin="3dp"
     android:background="@drawable/bg_trend_card_row"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp"
-    android:elevation="3dp">
+    android:elevation="3dp"
+    app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,53 +17,78 @@
             android:id="@+id/img_trending"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/tv_trending_name"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.16"
+            app:layout_constraintHorizontal_bias="0.093"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.592" />
+            app:layout_constraintVertical_bias="0.145" />
 
-        <TextView
-            android:id="@+id/tv_trending_name"
+
+        <LinearLayout
+            android:id="@+id/layout_trending_names"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:fontFamily="@font/open_sans"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/layout_price"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.186"
+            app:layout_constraintHorizontal_bias="0.106"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_trending" />
+            app:layout_constraintTop_toBottomOf="@+id/img_trending">
+
+            <TextView
+                android:id="@+id/tv_trending_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="start"
+                android:fontFamily="@font/open_sans"
+                android:text="Bitcoin"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.106"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_trending" />
+
+            <TextView
+                android:id="@+id/tv_trending_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="start"
+                android:fontFamily="@font/open_sans"
+                android:text="BTC"
+                android:textColor="@color/light_blue"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.112"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_trending_name" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.176"
+            app:layout_constraintHorizontal_bias="0.120"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_trending_name"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/layout_trending_names">
 
             <TextView
                 android:id="@+id/btc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:fontFamily="@font/open_sans"
                 android:gravity="top"
                 android:text="€ "
-                android:textColor="@color/light_blue"
+                android:textColor="@color/light_White"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_trending_price"
@@ -74,9 +99,10 @@
                 android:id="@+id/tv_trending_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
+                android:ellipsize="start"
                 android:fontFamily="@font/open_sans"
-                android:maxLength="5"
+                android:maxLength="8"
+                android:text=""
                 android:textColor="@color/teal"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,6 +111,24 @@
                 app:layout_constraintVertical_bias="0.0" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_trending_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/open_sans"
+            android:maxLength="8"
+            android:text=""
+            android:textColor="@color/yellow_crayola"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_price"
+            app:layout_constraintVertical_bias="0.111" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

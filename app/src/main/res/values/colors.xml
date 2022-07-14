@@ -18,5 +18,6 @@
     <color name="light_blue">#8fadd9</color>
     <color name="light_White">#dde4ea</color>
     <color name="teal">#4fe9e5</color>
-    <color name="Yellow_Crayola">#F6AA1C</color>
+    <color name="teal_dark">#37a3a3</color>
+    <color name="yellow_crayola">#F6AA1C</color>
 </resources>
