@@ -3,6 +3,7 @@ package com.marioioannou.cryptopal.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -41,6 +42,7 @@ class CoinFragment : Fragment() {
         viewModel = (activity as MainActivity).viewModel //Each fragment
         setupRecyclerView()
         setupTrendingRecyclerView()
+        //binding.shimmerRvCoin.startShimmer()
 
 //        coinAdapter = CoinAdapter{ coin ->
 //            val action = CoinFragmentDirections.actionCoinFragmentToCoinDetailFragment(coin)
@@ -69,19 +71,20 @@ class CoinFragment : Fragment() {
             Log.e(TAG, "viewModel.coinData.observe")
             when (coinResponse) {
                 is ScreenState.Loading -> {
+
                     Log.e(TAG, "coinData Response Loading")
-                    binding.progressBar.isVisible = false
                 }
                 is ScreenState.Success -> {
                     Log.e(TAG, " coinData Response Success")
-                    binding.progressBar.isVisible = false
+//                    binding.shimmerRvCoin.stopShimmer()
+//                    binding.shimmerRvCoin.visibility = View.GONE
+//                    binding.rvCoinRecyclerview.visibility = View.VISIBLE
                     coinResponse.data?.let { coindata ->
                         coinAdapter.differ.submitList(coindata.coins)
                     }
                 }
                 is ScreenState.Error -> {
                     Log.e(TAG, "coinData Response Error")
-                    binding.progressBar.isVisible = false
                     //notConnected()
                 }
             }
@@ -93,18 +96,16 @@ class CoinFragment : Fragment() {
             when (response) {
                 is ScreenState.Loading -> {
                     Log.e(TAG, "trendingCoins Response Loading")
-                    binding.progressBar.isVisible = false
                 }
                 is ScreenState.Success -> {
                     Log.e(TAG, " trendingCoins Response Success")
-                    binding.progressBar.isVisible = false
+                    //binding.shimmerRvCoin.stopShimmer()
                     response.data?.let { trendingCoinData ->
                         trendAdapter.differ.submitList(trendingCoinData.coins)
                     }
                 }
                 is ScreenState.Error -> {
                     Log.e(TAG, "trendingCoins Response Error")
-                    binding.progressBar.isVisible = false
                     //notConnected()
                 }
             }
@@ -136,11 +137,12 @@ class CoinFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_search -> {
-                findNavController().navigate(R.id.coinsSearch)
+                findNavController().navigate(R.id.searchingFragment)
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 //    private fun notConnected() {
 //        val dialogBuilder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)

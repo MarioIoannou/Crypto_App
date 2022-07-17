@@ -19,5 +19,7 @@
     <color name="light_White">#dde4ea</color>
     <color name="teal">#4fe9e5</color>
     <color name="teal_dark">#37a3a3</color>
+    <color name="shimmer_color">#B9FFFF</color>
+    <!--<color name="shimmer_color">#dddddd</color>-->
     <color name="yellow_crayola">#F6AA1C</color>
 </resources>

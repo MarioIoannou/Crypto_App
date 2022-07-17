@@ -94,8 +94,8 @@
         tools:layout="@layout/activity_coins_search" />
     <fragment
         android:id="@+id/searchingFragment"
-        android:name="com.marioioannou.cryptopal.SearchingFragment"
-        android:label="fragment_searching"
+        android:name="com.marioioannou.cryptopal.ui.fragments.SearchedCoinFragment"
+        android:label=""
         tools:layout="@layout/fragment_searching" />
     <fragment
         android:id="@+id/trendingCoinDetailFragment"

@@ -186,7 +186,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/trending_tv_change_in_1h"
+                        android:id="@+id/trending_tv_1h"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans"

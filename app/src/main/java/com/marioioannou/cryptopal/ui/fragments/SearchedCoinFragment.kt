@@ -51,6 +51,10 @@ class SearchedCoinFragment:Fragment() {
         })
         setUpRecyclerView()
 
+        binding.imgBackArrowSearchFragment.setOnClickListener {
+            mainActivity.onBackPressed()
+        }
+
         var job: Job? = null
         binding.etSearch.addTextChangedListener { editable ->
             job?.cancel()
@@ -65,22 +69,21 @@ class SearchedCoinFragment:Fragment() {
                                     if (response.data?.coin == null) {
                                         binding.progressBarSearch.isVisible = true
                                     } else {
-                                        binding.progressBarSearch.isVisible = false
                                         response.data.coin.let { newsResponse ->
                                             searchingAdapter.differ.submitList(mutableListOf(
                                                 newsResponse))
                                         }
+                                        binding.progressBarSearch.isVisible = false
                                     }
                                 }
-                                //binding.progressBar2.isVisible = false
                                 is ScreenState.Error -> {
-                                    //binding.progressBar2.isVisible = false
+                                    binding.progressBarSearch.isVisible = true
                                     response.message?.let { message ->
                                         Log.e("BreakingNewsFrag", message)
                                     }
                                 }
                                 is ScreenState.Loading -> {
-                                    //binding.progressBar2.isVisible = true
+                                    binding.progressBarSearch.isVisible = true
                                 }
                             }
                         })

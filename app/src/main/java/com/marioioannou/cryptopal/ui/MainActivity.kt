@@ -66,6 +66,11 @@ class MainActivity : AppCompatActivity() {
                     binding.myToolbar.isVisible = true
                 }
 
+                R.id.searchingFragment->{
+                    binding.bottomNavigationView.isVisible = false
+                    binding.myToolbar.isVisible = false
+                }
+
                 R.id.watchlistFragment ->{
                     binding.bottomNavigationView.isVisible = true
                     binding.myToolbar.isVisible = false

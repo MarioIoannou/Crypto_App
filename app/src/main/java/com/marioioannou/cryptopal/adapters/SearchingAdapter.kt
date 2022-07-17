@@ -1,6 +1,7 @@
 package com.marioioannou.cryptopal.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -43,12 +44,19 @@ class SearchingAdapter: RecyclerView.Adapter<SearchingAdapter.ViewHolder>()  {
         val coin = differ.currentList[position]
         holder.binding.apply {
             val coinLogo = coin.icon
+            val priceChange = coin.priceChange1h.toString()
             tvCoinName.text = coin.name
             tvCoinSymbol.text = coin.symbol?.uppercase()
             tvCoinPrice.text = "€ " + coin.price.toString()
-            //            tvCoinPriceChange.text =
-//                coin.priceChange1h.toString() + "%"
-            tvCoinPriceChange.text = coin.rank.toString()
+            if(priceChange.contains("-")){
+                tvCoinPriceChange.text =
+                    coin.priceChange1h.toString() + "%"
+                tvCoinPriceChange.setTextColor(Color.RED)
+            }else{
+                tvCoinPriceChange.text =
+                    coin.priceChange1h.toString() + "%"
+                tvCoinPriceChange.setTextColor(Color.GREEN)
+            }
             if(coinLogo == null){
                 imageCoinLogo.load(R.drawable.no_image_available)
             }else{

@@ -47,60 +47,60 @@ class TrendingCoinsAdapter : RecyclerView.Adapter<TrendingCoinsAdapter.TrendsVie
 
     override fun onBindViewHolder(holder: TrendsViewHolder, position: Int) {
         val trend = differ.currentList[position]
-        val name1 = trend.item?.slug
-        val name2 = trend.item?.id
+        val nameSlug = trend.item?.slug
+        val nameId = trend.item?.id
         CoroutineScope(Dispatchers.Main).launch {
-            val response1 = try {
-                CoinApiService.coinApi.getCoinById(name1.toString(), "EUR")
+            val responseSlug = try {
+                CoinApiService.coinApi.getCoinById(nameSlug.toString(), "EUR")
             } catch (e: IOException) {
                 return@launch
             }
-            val response2 = try {
-                CoinApiService.coinApi.getCoinById(name2.toString(), "EUR")
+            val responseId = try {
+                CoinApiService.coinApi.getCoinById(nameId.toString(), "EUR")
             } catch (e: IOException) {
                 return@launch
             }
-            if (response1.isSuccessful) {
-                val item1 = response1.body()?.coin
-                val trendingPriceChange1 = item1?.priceChange1d.toString()
-                if (item1 == null) {
-                    val item2 = response2.body()?.coin
-                    val trendingPriceChange2 = item2?.priceChange1d.toString()
-                    if (item2 == null) {
+            if (responseSlug.isSuccessful) {
+                val itemSlug = responseSlug.body()?.coin
+                val trendingPriceChangeSlug = itemSlug?.priceChange1d.toString()
+                if (itemSlug == null) {
+                    val itemId = responseId.body()?.coin
+                    val trendingPriceChangeId = itemId?.priceChange1d.toString()
+                    if (itemId == null) {
                         holder.binding.btc.isVisible = false
                         holder.binding.tvTrendingPrice.filters =
                             arrayOf(InputFilter.LengthFilter(15))
                         holder.binding.tvTrendingPrice.text = "Price not Found"
                         holder.binding.tvTrendingChange.visibility = View.GONE
                     } else {
-                        if (trendingPriceChange2.contains("-")) {
+                        if (trendingPriceChangeId.contains("-")) {
                             holder.binding.tvTrendingChange.text =
-                                "$trendingPriceChange2%"
+                                "$trendingPriceChangeId%"
                             holder.binding.tvTrendingChange.setTextColor(Color.RED)
                         } else {
                             holder.binding.tvTrendingChange.text =
-                                "$trendingPriceChange2%"
+                                "$trendingPriceChangeId%"
                             holder.binding.tvTrendingChange.setTextColor(Color.GREEN)
                         }
                         holder.binding.tvTrendingPrice.filters =
                             arrayOf(InputFilter.LengthFilter(8))
-                        holder.binding.tvTrendingPrice.text = item2.price.toString()
+                        holder.binding.tvTrendingPrice.text = itemId.price.toString()
                         holder.itemView.setOnClickListener {
                             onItemClickListener?.let { it(trend) }
                         }
                     }
                 } else {
-                    if (trendingPriceChange1.contains("-")) {
+                    if (trendingPriceChangeSlug.contains("-")) {
                         holder.binding.tvTrendingChange.text =
-                            "$trendingPriceChange1%"
+                            "$trendingPriceChangeSlug%"
                         holder.binding.tvTrendingChange.setTextColor(Color.RED)
                     } else {
                         holder.binding.tvTrendingChange.text =
-                            "$trendingPriceChange1%"
+                            "$trendingPriceChangeSlug%"
                         holder.binding.tvTrendingChange.setTextColor(Color.GREEN)
                     }
                     holder.binding.tvTrendingPrice.filters = arrayOf(InputFilter.LengthFilter(8))
-                    holder.binding.tvTrendingPrice.text = item1.price.toString()
+                    holder.binding.tvTrendingPrice.text = itemSlug.price.toString()
                     holder.itemView.setOnClickListener {
                         onItemClickListener?.let { it(trend) }
                     }

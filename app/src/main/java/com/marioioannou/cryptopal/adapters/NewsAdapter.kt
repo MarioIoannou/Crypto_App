@@ -1,5 +1,6 @@
 package com.marioioannou.cryptopal.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -35,15 +36,16 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article =  differ.currentList[position]
+        Log.d("News Adapter","News image: ${article.imgURL}")
         holder.binding.apply {
-            if (article.imgURL == null){
+            if (article.imgURL == null || article.imgURL.contains("/source/undefined") ){
                 imgImage.load(R.drawable.no_image_available)
             }else{
                 imgImage.load(article.imgURL)
             }
             tvTitle.text = article.title
             //tvDescription.text = article.description
-            tvSource.text = article.source
+            //tvSource.text = article.source
             cvReadMore.setOnClickListener {
                     onItemClickListener?.let{
                         it(article)
