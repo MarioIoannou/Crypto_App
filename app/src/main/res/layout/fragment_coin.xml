@@ -88,6 +88,37 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_rv_trending_coin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <include layout="@layout/shimmer_trending_coin_row" />
+
+                <include layout="@layout/shimmer_trending_coin_row" />
+
+                <include layout="@layout/shimmer_trending_coin_row" />
+
+                <include layout="@layout/shimmer_trending_coin_row" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -100,7 +131,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trend_layout" />
 
-    <!-- <com.facebook.shimmer.ShimmerFrameLayout
+    <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_rv_coin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -111,7 +142,6 @@
         app:layout_constraintTop_toBottomOf="@+id/trend_layout">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -136,10 +166,18 @@
 
             <include layout="@layout/shimmer_coin_row" />
 
+            <include layout="@layout/shimmer_coin_row" />
+
+            <include layout="@layout/shimmer_coin_row" />
+
+            <include layout="@layout/shimmer_coin_row" />
+
+            <include layout="@layout/shimmer_coin_row" />
+
 
         </LinearLayout>
 
-    </com.facebook.shimmer.ShimmerFrameLayout>-->
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

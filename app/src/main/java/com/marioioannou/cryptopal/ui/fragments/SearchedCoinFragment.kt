@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -57,6 +58,7 @@ class SearchedCoinFragment:Fragment() {
 
         var job: Job? = null
         binding.etSearch.addTextChangedListener { editable ->
+            binding.shimmerRvSearchedCoin.startShimmer()
             job?.cancel()
             job = MainScope().launch {
                 delay(Constants.SEARCH_NEWS_DELAY)
@@ -67,23 +69,25 @@ class SearchedCoinFragment:Fragment() {
                             when (response) {
                                 is ScreenState.Success -> {
                                     if (response.data?.coin == null) {
-                                        binding.progressBarSearch.isVisible = true
+                                        binding.shimmerRvSearchedCoin.isVisible = true
                                     } else {
                                         response.data.coin.let { newsResponse ->
                                             searchingAdapter.differ.submitList(mutableListOf(
                                                 newsResponse))
                                         }
-                                        binding.progressBarSearch.isVisible = false
+                                        binding.shimmerRvSearchedCoin.stopShimmer()
+                                        binding.shimmerRvSearchedCoin.isVisible = false
                                     }
                                 }
                                 is ScreenState.Error -> {
-                                    binding.progressBarSearch.isVisible = true
+                                    //searchingAdapter.clearList()
+                                    binding.shimmerRvSearchedCoin.isVisible = true
                                     response.message?.let { message ->
                                         Log.e("BreakingNewsFrag", message)
                                     }
                                 }
                                 is ScreenState.Loading -> {
-                                    binding.progressBarSearch.isVisible = true
+                                    binding.shimmerRvSearchedCoin.isVisible = true
                                 }
                             }
                         })

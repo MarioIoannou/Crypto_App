@@ -1,6 +1,8 @@
 package com.marioioannou.cryptopal.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,6 +33,7 @@ class NewsFragment : Fragment() {
         viewModel = (activity as MainActivity).viewModel
 
         setUpRecyclerView()
+        binding.shimmerRvNews.startShimmer()
 
         newsAdapter.setOnItemClickListener { article : New->
             val action = NewsFragmentDirections.actionNewsFragmentToArticleFragment(article)
@@ -40,6 +43,10 @@ class NewsFragment : Fragment() {
         viewModel.coinNews.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is ScreenState.Success -> {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.shimmerRvNews.stopShimmer()
+                        binding.shimmerRvNews.visibility = View.GONE
+                    },100L)
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.news)
                     }

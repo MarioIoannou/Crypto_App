@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_card_row"
-    android:padding="10dp"
-    android:layout_marginTop="3dp"
-    android:layout_marginBottom="3dp"
     android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp">
+    android:layout_marginTop="3dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="3dp"
+    android:background="@drawable/bg_card_row"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,14 +19,63 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="3dp"
             android:background="@color/shimmer_color"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:background="@color/shimmer_color"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables,UselessParent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/shimmer_color" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/shimmer_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables,UselessParent">
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/shimmer_color" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/shimmer_color" />
+        </LinearLayout>
 
     </LinearLayout>
 

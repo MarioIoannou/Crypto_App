@@ -68,6 +68,11 @@ class SearchingAdapter: RecyclerView.Adapter<SearchingAdapter.ViewHolder>()  {
         }
     }
 
+    fun clearList() {
+        differ.currentList.clear()
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
 
         return differ.currentList.size

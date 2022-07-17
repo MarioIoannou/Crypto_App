@@ -1,6 +1,8 @@
 package com.marioioannou.cryptopal.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -18,6 +20,7 @@ import com.marioioannou.cryptopal.coin_data.model.coin_data.CryptoCoin
 import com.marioioannou.cryptopal.coin_data.model.coin_search.Coin
 import com.marioioannou.cryptopal.ui.MainActivity
 import com.marioioannou.cryptopal.utils.ScreenState
+import kotlinx.coroutines.delay
 
 class CoinFragment : Fragment() {
 
@@ -42,7 +45,8 @@ class CoinFragment : Fragment() {
         viewModel = (activity as MainActivity).viewModel //Each fragment
         setupRecyclerView()
         setupTrendingRecyclerView()
-        //binding.shimmerRvCoin.startShimmer()
+        binding.shimmerRvCoin.startShimmer()
+        binding.shimmerRvTrendingCoin.startShimmer()
 
 //        coinAdapter = CoinAdapter{ coin ->
 //            val action = CoinFragmentDirections.actionCoinFragmentToCoinDetailFragment(coin)
@@ -71,14 +75,15 @@ class CoinFragment : Fragment() {
             Log.e(TAG, "viewModel.coinData.observe")
             when (coinResponse) {
                 is ScreenState.Loading -> {
-
                     Log.e(TAG, "coinData Response Loading")
                 }
                 is ScreenState.Success -> {
                     Log.e(TAG, " coinData Response Success")
-//                    binding.shimmerRvCoin.stopShimmer()
-//                    binding.shimmerRvCoin.visibility = View.GONE
-//                    binding.rvCoinRecyclerview.visibility = View.VISIBLE
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.shimmerRvCoin.stopShimmer()
+                        binding.shimmerRvCoin.visibility = View.GONE
+                    },100L)
+                    //binding.rvCoinRecyclerview.visibility = View.VISIBLE
                     coinResponse.data?.let { coindata ->
                         coinAdapter.differ.submitList(coindata.coins)
                     }
@@ -100,6 +105,10 @@ class CoinFragment : Fragment() {
                 is ScreenState.Success -> {
                     Log.e(TAG, " trendingCoins Response Success")
                     //binding.shimmerRvCoin.stopShimmer()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        binding.shimmerRvTrendingCoin.stopShimmer()
+                        binding.shimmerRvTrendingCoin.visibility = View.GONE
+                    },100L)
                     response.data?.let { trendingCoinData ->
                         trendAdapter.differ.submitList(trendingCoinData.coins)
                     }
@@ -141,6 +150,10 @@ class CoinFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun hideShimmer(){
+        binding.shimmerRvTrendingCoin.visibility = View.GONE
     }
 
 
